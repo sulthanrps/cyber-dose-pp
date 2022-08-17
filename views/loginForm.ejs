@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        input, select {
+            display: block;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 200px;
+        }
+
+        select {
+            width: 225px;
+        }
+
+        button {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login Form</h1>
+    <% if (error) { %>
+     <p style="color: red;"><%= error %></p>
+    <% } %>
+    <form action="/login" method="post">
+        <label for="">Username</label>
+        <input type="text" name="username" placeholder="Input your username !">
+        <label for="">Password</label>
+        <input type="password" name="password" placeholder="Input your password !">
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

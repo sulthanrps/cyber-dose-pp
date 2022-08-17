@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        input, select {
+            display: block;
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 200px;
+        }
+
+        select {
+            width: 225px;
+        }
+
+        button {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Register Form</h1>
+    <% if (errors) { %>
+     <p style="color: red;"><%= errors %> </p>
+    <% } %>
+    <form action="/register" method="post">
+        <label for="">Email</label>
+        <input type="text" name="email" placeholder="Input your email !">
+        <label for="">Username</label>
+        <input type="text" name="username" placeholder="Create your username !">
+        <label for="">Password</label>
+        <input type="text" name="password" placeholder="Create your password !">
+        <label for="">Role</label>
+        <select name="role" id="">
+            <option value="" selected disabled>-- CHOOSE ROLE --</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+        </select>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

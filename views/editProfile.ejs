@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        body {
+            margin: 20px;
+        }
+        input {
+            display: block;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        button {
+            padding: 7px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+    <form action="/user/<%= data.UserId %>/profile/editProfile" method="post">
+        <label for="">First Name</label>
+        <input type="text" name="firstName" value="<%= data.firstName %>">
+
+        <label for="">Last Name</label>
+        <input type="text" name="lastName" value="<%= data.lastName %>">
+
+        <label for="">Birth Date</label>
+        <input type="date" name="birthDate" value=<%= data.formattedDate %>>
+
+        <label for="">Profile Picture URL</label>
+        <input type="text" name="profileImgurl" value="<%= data.profileImgurl %>">
+        
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <h1>Profile</h1>
+    <a href="/user/<%= data.UserId %>">back</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Age</th>
+                <th>Profile Picture</th>
+                <th>Username</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= data.formattedName %></td>
+                <td><%= data.age() %></td>
+                <td>
+                    <img src="<%= data.profileImgurl %>" alt="">
+                </td>
+                <td><%= data.User.username %></td>
+                <td>
+                    <a href="/user/<%= data.UserId %>/profile/editProfile">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
