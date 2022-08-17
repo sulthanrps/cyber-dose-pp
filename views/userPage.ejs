@@ -5,10 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Page</title>
+    <style>
+        input{
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome back <%= data.User.username %></h1>
-    <a href="/user/<%= data.User.id %>/profile">Profile</a>
-    <a href="/logout">Logout</a>
+    <h1>Welcome back <%= data.username %></h1>
+    <% if (data.Profile) { %>
+        <a href="/user/<%= data.id %>/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    <% } else {%>
+        <h2>Let's setup your profile !</h2>
+        <form action="/user/<%= data.id %>/profile/add" method="post">
+            <label for="">First Name</label>
+            <input type="text" name="firstName">
+
+            <label for="">Last Name</label>
+            <input type="text" name="lastName">
+
+            <label for="">Birth Date</label>
+            <input type="date" name="birthDate">
+
+            <label for="">Profile Image URL</label>
+            <input type="text" name="profileImgurl">
+
+            <button type="submit">Submit</button>
+        </form>
+    <% } %> 
 </body>
 </html>

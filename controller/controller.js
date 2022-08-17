@@ -2,6 +2,11 @@ const {User, Profile} = require('../models/index')
 const bcryptjs = require('bcryptjs')
 
 class Controller {
+
+    static homePage(req, res){
+        res.render('landingPage')
+    }
+
     static registerForm(req, res) {
         let errors = req.query.errors
         res.render('registerForm', {errors})
@@ -116,14 +121,33 @@ class Controller {
 
     static userPage(req, res){
         let UserId = +req.params.userId
-        Profile.findOne({
-            where : {UserId},
+        User.findOne({
+            where : {id: UserId},
             include : {
-                model: User
+                model: Profile
             }
         })
         .then(data => {
             res.render('userPage', {data})
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static saveAddedProfile(req, res){
+        let id = +req.params.userId
+        let body = {
+            firstName : req.body.firstName,
+            lastName : req.body.lastName, 
+            birthDate : req.body.birthDate, 
+            profileImgurl : req.body.profileImgurl,
+            UserId : id
+        }
+
+        Profile.create(body)
+        .then(() => {
+            res.redirect(`/user/${id}`)
         })
         .catch(err => {
             res.send(err)

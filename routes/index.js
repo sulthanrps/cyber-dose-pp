@@ -2,6 +2,13 @@ const Controller = require('../controller/controller')
 
 const routes = require('express').Router()
 
+// ENDPOINT HOME PAGE / LANDING PAGE
+routes.get('/', (req, res) => {
+    res.redirect('/landingPage')
+})
+
+routes.get('/landingPage', Controller.homePage)
+
 // ENDPOINT REGISTER
 routes.get('/register', Controller.registerForm)
 routes.post('/register', Controller.saveUser)
@@ -32,6 +39,7 @@ routes.get('/admin/delete/:idUser', Controller.deleteUser)
 // ENDPOINT USER
 routes.get('/user/:userId', Controller.userPage)
 routes.get('/user/:userId/profile', Controller.showProfile)
+routes.post('/user/:userId/profile/add', Controller.saveAddedProfile)
 routes.get('/user/:userId/profile/editProfile', Controller.updateProfileForm)
 routes.post('/user/:userId/profile/editProfile', Controller.saveProfileChanges)
 routes.get('/user/:userId/posts', Controller.allPost)
