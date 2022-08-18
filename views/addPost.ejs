@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Post</title>
+
+    <style>
+        input, textarea {
+            display: block;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        button {
+            padding: 7px;
+        }
+
+        input {
+            width: 255px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Post</h1>
+    <form action="/user/<%= userId %> /posts/add" method="post">
+        <label for="">Caption</label>
+        <% if (caption) { %>
+            <textarea name="caption" id="" cols="30" rows="10"><%= caption %></textarea>
+        <% } else {%>
+            <textarea name="caption" id="" cols="30" rows="10" placeholder="Insert your caption here !"></textarea>
+        <% } %> 
+        
+        <label for="">Image URL</label>
+        <!-- <textarea name="imgUrl" id="" cols="30" rows="10" placeholder="Insert your image url here !"></textarea> -->
+        <input type="text" name="imgUrl" placeholder="Insert your image's url !">
+
+        <button type="submit">Add Post</button>
+    </form>
+</body>
+</html>

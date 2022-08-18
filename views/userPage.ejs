@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <style>
+        input{
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            padding: 10px;
+        }
+
+        .img-section > img {
+            width: 800px;
+            height: 500px;
+        }
+
+        .post-container {
+            border-radius: 10px;
+            box-shadow: 8px 10px 23px 0px rgba(153,153,153,0.36);
+            -webkit-box-shadow: 8px 10px 23px 0px rgba(153,153,153,0.36);
+            -moz-box-shadow: 8px 10px 23px 0px rgba(153,153,153,0.36);
+            width: 800px;
+            box-sizing: border-box;
+            margin: 0px auto;
+            margin-bottom: 40px;
+        }
+
+        .caption-section {
+            width: 800px;
+        }
+
+        .content-section {
+            padding: 10px;
+            margin-top: -20px;
+        }
+
+        .like-btn {
+            text-decoration: none;
+            color: rgb(248, 53, 53);
+            border: 0.5px solid rgb(248, 53, 53);
+            padding: 5px;
+            border-radius: 2px;
+        }
+
+        .like-btn:hover {
+            background-color: rgb(248, 53, 53);
+            color: white;
+            transition: 0.5s all;
+        }
+
+
+        .edit-btn {
+            text-decoration: none;
+            color: rgb(203, 203, 29);
+            border: 0.5px solid rgb(238, 238, 45);
+            padding: 5px;
+            border-radius: 2px;
+        }
+
+        .edit-btn:hover {
+            background-color: rgb(238, 238, 45);
+            color: white;
+            transition: 0.5s all;
+        }
+
+        .sort-btn {
+            border: none;
+            background-color: rgb(248, 53, 53);
+            color: white;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .back-btn, .del-btn {
+            margin-left: 40px;
+            text-decoration: none;
+            color: white;
+            background-color: rgb(248, 53, 53);
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .del-btn {
+            margin-left: 0;
+        }
+
+        .action-btn {
+            float: right;
+            margin-top: -50px;
+        }
+
+        .profile-header {
+            padding: 10px;
+        }
+
+        .profile-picture {
+            width: 50px;
+            height: 45px;
+            border-radius: 100%;
+        }
+
+        .profile-header > h3 {
+            display: block;
+            margin-top: -40px;
+            margin-left: 60px;
+            font-size: 20px;
+        }
+
+        .right-item {
+            float: right;
+            margin-top: -50px;
+            margin-right: 20px;
+        }
+
+        .right-item > a{
+            text-decoration: none;
+            padding: 5px;
+            color: white;
+            margin-left: 5px;
+            background-color: red;
+            border-radius: 3px;
+        }
+
+        h1 {
+            margin-left: 20px;
+        }
+
+        .right-item > .quotes-btn{ 
+            background-color: bisque;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome back <%= data.username %></h1>
+    <% if (data.Profile) { %>
+        <div class="right-item">
+            <a href="/user/<%= data.id %>/profile">Profile</a>
+            <a href="/user/<%= data.id %>/posts ">Posts</a>
+            <a href="/user/<%= data.id %>/quotes" class="quotes-btn">Quotes</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <% allPost.forEach(el => { %>
+            <div class="post-container">
+                <div class="profile-header">
+                    <img src="<%= el.User.Profile.profileImgurl %>" alt="Profile Picture" class="profile-picture">
+                    <h3><%= el.User.username %></h3>
+                </div>
+                <div class="img-section">
+                    <img src="<%= el.imgUrl %>" alt="Picture of Post">
+                </div>
+    
+                <div class="content-section">
+                    <div class="like-section">
+                        <p><span class="like-icon">❤️</span><%= el.like %></p>
+                        <a href="/user/<%= data.id %>/likes/<%= el.id %>" class="like-btn">Like</a>
+                    </div>
+        
+                    <div class="caption-section">
+                        <p><%= el.caption %></p>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    <% } else {%>
+        <h2>Let's setup your profile !</h2>
+        <form action="/user/<%= data.id %>/profile/add" method="post">
+            <label for="">First Name</label>
+            <input type="text" name="firstName">
+
+            <label for="">Last Name</label>
+            <input type="text" name="lastName">
+
+            <label for="">Birth Date</label>
+            <input type="date" name="birthDate">
+
+            <label for="">Profile Image URL</label>
+            <input type="text" name="profileImgurl">
+
+            <button type="submit">Submit</button>
+        </form>
+    <% } %> 
+</body>
+</html>

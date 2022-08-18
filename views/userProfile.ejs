@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+
+        .header {
+            border-bottom: 1px solid #333;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .profile-container {
+            box-shadow: 8px 10px 23px 0px rgba(153,153,153,0.36);
+            -webkit-box-shadow: 8px 10px 23px 0px rgba(153,153,153,0.36);
+            -moz-box-shadow: 8px 10px 23px 0px rgba(153,153,153,0.36);
+            width: 50%;
+            margin: 8% auto;
+            border-radius: 2em;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 100%;
+        }
+
+        .content-profile {
+            padding: 0px;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        .data-container {
+            padding: 10px;
+            width: 95%;
+        }
+
+        .input-holder {
+            width: 80%;
+        }
+
+        .edit-btn {
+            text-decoration: none;
+            color: white;
+            padding: 5px;
+            background-color: rgb(207, 207, 8);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            position: relative;
+            top: 20px;
+            left: 20px;
+            color: black;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <a href="/user/<%= data.UserId %>" class="back-btn">←</a>
+        <div class="header">
+            <img src="<%= data.profileImgurl %>" alt="Profile Picture" class="profile-picture">
+            <h2><%= data.User.username %>'s Profile</h2>
+            <a href="/user/<%= data.UserId %>/profile/editProfile" class=edit-btn>Edit Profile</a>
+        </div>
+        <div class="content-profile"></div>
+            <table>
+                <tr>
+                    <td><h3>Full Name</h3></td>
+                    <td><h3>:</h3></td>
+                    <td class="input-holder">
+                        <input type="text" value="<%= data.formattedName %>" readonly class="data-container">   
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><h3>Age</h3></td>
+                    <td><h3>:</h3></td>
+                    <td class="input-holder">
+                        <input type="text" value="<%= data.age() %>" readonly class="data-container">   
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><h3>Username</h3></td>
+                    <td><h3>:</h3></td>
+                    <td class="input-holder">
+                        <input type="text" value="<%= data.User.username %>" readonly class="data-container">   
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
