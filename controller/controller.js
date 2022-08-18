@@ -1,5 +1,6 @@
-const {User, Profile} = require('../models/index')
+const {User, Profile, Post} = require('../models/index')
 const bcryptjs = require('bcryptjs')
+const quote = require('find-quote')
 
 class Controller {
 
@@ -128,7 +129,18 @@ class Controller {
             }
         })
         .then(data => {
-            res.render('userPage', {data})
+            Post.findAll({
+                include : {
+                    all : true,
+                    nested: true
+                },
+                order : [
+                    ['id', 'ASC']
+                ]
+            })
+            .then(allPost => {
+                res.render('userPage', {data, allPost})
+            })
         })
         .catch(err => {
             res.send(err)
@@ -199,33 +211,146 @@ class Controller {
 
 
     static allPost(req, res){
+        let option;
+        let sort = req.query.sort
         let UserId = +req.params.userId
-        res.send('tampilin semua post dari id ' + UserId)
+        if(sort){
+            option = {
+                where : {UserId},
+                include : {
+                    all : true,
+                    nested: true
+                },
+                order : [
+                    [sort, 'DESC']
+                ]
+            }
+        }
+
+        else {
+            option = {
+                where : {UserId},
+                include : {
+                    all : true,
+                    nested: true
+                },
+                order : [
+                    ['id', 'DESC']
+                ]
+            }
+        }
+        Post.findAll(option)
+        .then(data => {
+            res.render('posts', {data, UserId})
+        })
+        
     }
 
     static addPost(req, res){
-        let UserId = +req.params.userId
-        res.send('tampilin form add post dengan id ' + UserId)
+        let userId = +req.params.userId
+        let caption = req.query.caption
+        res.render('addPost', {userId, caption})
     }
 
     static savePost(req, res){
-        let UserId = +req.params.userId
-        res.send('save data post untuk user id ' + UserId)
+        let userId = +req.params.userId
+        let body = {
+            caption : req.body.caption,
+            imgUrl : req.body.imgUrl,
+            UserId: userId
+        }
+
+        Post.create(body)
+        .then(() => {
+            res.redirect(`/user/${userId}/posts`)
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static updatePostForm(req, res){
-        let UserId = +req.params.userId
-        res.send('tampilin form edit post untuk user id ' + UserId)
+        let userId = +req.params.userId
+        let postId = +req.params.postId
+        Post.findOne({
+            where : {id: postId}
+        })
+        .then(data => {
+            res.render('editPost', {data, userId, postId})
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static savePostChanges(req, res){
-        let UserId = +req.params.userId
-        res.send('save edited data post untuk user id ' + UserId)
+        let userId = +req.params.userId
+        let postId = +req.params.postId
+        let {caption, imgUrl} = req.body
+        Post.update({
+            caption : caption,
+            imgUrl : imgUrl
+        }, {
+            where : {id : postId}
+        })
+        .then(() => {
+            res.redirect(`/user/${userId}/posts`)
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static deletePost(req, res){
-        let UserId = +req.params.userId
-        res.send('delete data post untuk user id ' + UserId)
+        let userId = +req.params.userId
+        let postId = +req.params.postId
+        Post.destroy({
+            where : {id : postId}
+        })
+        .then(() => {
+            res.redirect(`/user/${userId}/posts`)
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static addLike(req, res){
+        let userId = +req.params.userId
+        let postId = +req.params.postId
+        Post.increment({
+            like : 1
+        }, {
+            where : {id: postId}
+        })
+        .then(() => {
+            res.redirect(`/user/${userId}/posts`)
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static quotePage(req, res){
+        let userId = +req.params.userId
+        let randomQuote = quote.getQuote() 
+        res.render('quotePage', {randomQuote, userId})
+    }
+
+    static addLikeFromGlobal(req, res){
+        let userId = +req.params.userId
+        let postId = +req.params.postId
+        Post.increment({
+            like : 1
+        }, {
+            where : {id: postId}
+        })
+        .then(() => {
+            res.redirect(`/user/${userId}`)
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 }
 

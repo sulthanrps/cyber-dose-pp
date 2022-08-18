@@ -5,17 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Dose</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-image: url("https://static.vecteezy.com/system/resources/previews/002/100/747/non_2x/3d-illustration-of-dark-cyberspace-with-neon-lights-free-photo.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo {
+            margin: 40px;
+        }
+
+        .right-item {
+            float: right;
+            margin-top: -75px;
+            margin-right: 40px;
+        }
+
+        .register-btn, .login-btn {
+            text-decoration: none;
+            margin-left: 30px;
+            color: white;
+            padding: 7px;
+        }
+
+        .content {
+            margin: 40px auto;
+            margin-top: 100px;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        h1 > .bigger-text {
+            font-size: 120px;
+        }
+
+        .content > p {
+            margin-top: -30px;
+            font-size: 20px;
+            width: 42%;
+            text-align: center;
+            margin-left: 30%;
+            word-spacing: 5px;
+            line-height: 35px;
+        }
+
+        .blue {
+            color: #5cbefa;
+        }
+
+        .pink {
+            color: #f018fa;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome To Cyber Dose</h1>
-    <div>
-        <p>Doesn't have an account ?, go register yourself by click the link down below !</p>
-        <a href="/register">Register</a><br>
+    <h1 class="logo">CYBERDOSE</h1>
+    <div class="right-item">
+        <a href="/register" class="register-btn">Register</a>
+        <a href="/login" class="login-btn">Login</a>
+    </div>
 
-        <p>Have an account ?, click the link down below to login</p>
-        <a href="/login">Login</a>
+    <div class="content">
+        <h1 class="greeting">WELCOME TO <br><span class="bigger-text"><span class="blue">Cyber</span><span class="pink">Dose</span></span></h1>
 
-
+        <p>
+            CyberDose is a free social media platform that is fun to use and is very easy to operate.
+            We ensure your user experience and your most convenient in using our app !.
+            Share whatever you want to share, express yourself with CyberDose !, your daily social media dose !
+        </p>
     </div>
 </body>
 </html>

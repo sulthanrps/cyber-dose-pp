@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes Generator</title>
+    <style>
+        body{
+            text-align: center;
+            margin: 100px;
+        }
+
+        .quote-section {
+            background-color: antiquewhite;
+            width: fit-content;
+            padding: 20px;
+            margin: 0px auto;
+        }
+
+        .quote {
+            background-color: white;
+            padding: 5px;
+        }
+
+        .use-btn {
+            text-decoration: none;
+            color: black;
+            padding: 5px;
+            background-color: rgb(211, 201, 189);
+        }
+    </style>
+</head>
+<body>
+    <h1>Quote Generator</h1>
+    <div class="quote-section">
+        <p class="quote"><%= randomQuote %></p>
+        <form action="/user/<%= userId %>/quotes" method="get">
+            <button type="submit" name="random" value="true">Randomize</button>
+        </form>
+
+        <p>Wanna use this quote as your new post's caption ?, click the button down below !</p>
+        <a href="/user/<%= userId %>/posts/add?caption=<%= randomQuote %>" class="use-btn">Use Quote</a>
+    </div>
+</body>
+</html>

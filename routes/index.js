@@ -38,6 +38,11 @@ routes.get('/admin/delete/:idUser', Controller.deleteUser)
 
 // ENDPOINT USER
 routes.get('/user/:userId', Controller.userPage)
+
+// HANDLE LIKE DARI HALAMAN GLOBAL (TAMPIL SEMUA POST YG ADA DI DB)
+routes.get('/user/:userId/likes/:postId', Controller.addLikeFromGlobal)
+
+
 routes.get('/user/:userId/profile', Controller.showProfile)
 routes.post('/user/:userId/profile/add', Controller.saveAddedProfile)
 routes.get('/user/:userId/profile/editProfile', Controller.updateProfileForm)
@@ -45,10 +50,14 @@ routes.post('/user/:userId/profile/editProfile', Controller.saveProfileChanges)
 routes.get('/user/:userId/posts', Controller.allPost)
 routes.get('/user/:userId/posts/add', Controller.addPost)
 routes.post('/user/:userId/posts/add', Controller.savePost)
-routes.get('/user/:userId/posts/edit/:idPost', Controller.updatePostForm)
-routes.post('/user/:userId/posts/edit/:idPost', Controller.savePostChanges)
-routes.get('/user/:userId/posts/delete/:idPost', Controller.deletePost)
+routes.get('/user/:userId/posts/edit/:postId', Controller.updatePostForm)
+routes.post('/user/:userId/posts/edit/:postId', Controller.savePostChanges)
+routes.get('/user/:userId/posts/delete/:postId', Controller.deletePost)
+routes.get('/user/:userId/posts/like/:postId', Controller.addLike)
+
+
 
 // ENDPOINT MVP (MOVIE QUOTES)
+routes.get('/user/:userId/quotes', Controller.quotePage)
 
 module.exports = routes
